@@ -1,0 +1,13 @@
+.option-btn{
+    background-color:rgb(59 7 100);
+    padding: 15px;
+    color: white;
+    border-radius: 30px;
+    margin-top: 4px;
+    cursor: pointer;
+    
+};
+
+.option-btn:hover{
+    background-color:rgb(108, 17, 177) ;
+}
