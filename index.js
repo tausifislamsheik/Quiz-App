@@ -124,6 +124,8 @@ const quizData = [
 const questions = [...quizData].sort(()=> Math.random - 0.5);
 let currentQuestion = 0 ;
 let score = 0;
+let timer;
+let leftTimer;
 
 const timerEl = document.getElementById('timer')
 const questionEl = document.getElementById('question')
@@ -132,7 +134,10 @@ const nextBtn = document.getElementById('next-btn')
 const resultEl = document.getElementById('result')
 
 function loadQuestion(){
-       
+       clearInterval(timer);
+       leftTimer = 15;
+       updateTimer();
+       timer = setInterval(countdown, 1000);
       const q = questions[currentQuestion];
       questionEl.textContent = `Q${currentQuestion + 1}.${q.question}`
       optionsEl.innerText = '';
@@ -149,7 +154,22 @@ function loadQuestion(){
       nextBtn.style.display = 'none';
 }
 
+function countdown(){
+    leftTimer--;
+    updateTimer();
+
+    if(leftTimer === 0){
+        clearInterval(timer);
+        selectAnswer(questions[currentQuestion]?.correct)
+    }
+}
+
+function updateTimer(){
+    timerEl.innerHTML = `<p>⏰<span class="text-2xl ml-1">${leftTimer}</span></p>`
+}
+
 function selectAnswer(index){
+    clearInterval(timer)
     const q = questions[currentQuestion]
     const buttons = document.querySelectorAll('.option-btn');
     buttons.forEach(btn => btn.disabled = true);
@@ -187,6 +207,7 @@ function showResult(){
         <img class="h-50 w-50 mx-auto mb-2" src="completed.jpg" alt="No photo available">
         <h2 class="text-4xl mb-4 font-bold">Hurray!!! Quiz Completed</h2>
         <p class="font-semibold text-xl">You have scored <span class="bg-green-800 rounded-2xl p-2 text-white">${score}</span> out of <span class="bg-orange-600 rounded-2xl p-2 text-white">${questions.length}</span> questions</p>
+        <button class="bg-green-700 p-3 text-xl font-semibold mt-6 rounded-xl text-white cursor-pointer" onclick="location.reload()">Restart</button>
      `
      timerEl.style.display = 'none'
      questionEl.style.display = 'none'
