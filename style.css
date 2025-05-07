@@ -11,3 +11,10 @@
 .option-btn:hover{
     background-color:rgb(108, 17, 177) ;
 }
+
+.correct{
+    background-color: green;
+}
+.wrong{
+    background-color: rgb(186, 10, 10);
+}

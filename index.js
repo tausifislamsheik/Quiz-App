@@ -134,15 +134,46 @@ function loadQuestion(){
        
       const q = questions[currentQuestion];
       questionEl.textContent = `Q${currentQuestion + 1}.${q.question}`
+      optionsEl.innerText = '';
+      
 
       q.options.forEach((option, index)=>{
         const btn = document.createElement('button');
         btn.classList.add('option-btn');
         btn.textContent = option;
+        btn.addEventListener('click', ()=> selectAnswer(index))
         optionsEl.appendChild(btn);
       });
 
       nextBtn.style.display = 'none';
+}
+
+function selectAnswer(index){
+    const q = questions[currentQuestion]
+    const buttons = document.querySelectorAll('.option-btn');
+    buttons.forEach(btn => btn.disabled = true);
+    if(index === q.correct){
+        buttons[index].classList.add('correct');
+    }else{
+        buttons[index].classList.add('wrong');
+        buttons[q.correct].classList.add('correct')
+    }
+
+    nextBtn.style.display = 'inline-block'
+};
+
+nextBtn.addEventListener('click', ()=>{
+    currentQuestion++
+
+    if(currentQuestion < questions.length){
+        loadQuestion();
+    }else{
+        showResult();
+    }
+});
+
+function showResult(){
+
 }
 
 loadQuestion();
