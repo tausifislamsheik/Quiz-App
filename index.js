@@ -73,7 +73,7 @@ const quizData = [
         question:' Which symbol is used for optional chaining in JavaScript?',
         options:[
             '!!',
-            '?.',
+            '?',
             '::',
             '??'
         ],
@@ -123,12 +123,13 @@ const quizData = [
 
 const questions = [...quizData].sort(()=> Math.random - 0.5);
 let currentQuestion = 0 ;
+let score = 0;
 
 const timerEl = document.getElementById('timer')
 const questionEl = document.getElementById('question')
 const optionsEl = document.getElementById('options')
 const nextBtn = document.getElementById('next-btn')
-const result = document.getElementById('result')
+const resultEl = document.getElementById('result')
 
 function loadQuestion(){
        
@@ -153,6 +154,7 @@ function selectAnswer(index){
     const buttons = document.querySelectorAll('.option-btn');
     buttons.forEach(btn => btn.disabled = true);
     if(index === q.correct){
+        score++
         buttons[index].classList.add('correct');
     }else{
         buttons[index].classList.add('wrong');
@@ -173,7 +175,23 @@ nextBtn.addEventListener('click', ()=>{
 });
 
 function showResult(){
+ 
+     const highScore = localStorage.getItem('quizHighScore') || 0;
+     const isNew = score > highScore;
 
+     if(isNew){
+        localStorage.setItem('quizHighScore', score);
+     }
+
+     resultEl.innerHTML=`
+        <img class="h-50 w-50 mx-auto mb-2" src="completed.jpg" alt="No photo available">
+        <h2 class="text-4xl mb-4 font-bold">Hurray!!! Quiz Completed</h2>
+        <p class="font-semibold text-xl">You have scored <span class="bg-green-800 rounded-2xl p-2 text-white">${score}</span> out of <span class="bg-orange-600 rounded-2xl p-2 text-white">${questions.length}</span> questions</p>
+     `
+     timerEl.style.display = 'none'
+     questionEl.style.display = 'none'
+     optionsEl.style.display = 'none'
+     nextBtn.style.display = 'none'
 }
 
 loadQuestion();
