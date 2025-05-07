@@ -204,7 +204,7 @@ function showResult(){
      }
 
      resultEl.innerHTML=`
-        <img class="h-50 w-50 mx-auto mb-2" src="completed.jpg" alt="No photo available">
+        <img class="h-50 w-50 mx-auto mb-2" src="images/completed.jpg" alt="No photo available">
         <h2 class="text-4xl mb-4 font-bold">Hurray!!! Quiz Completed</h2>
         <p class="font-semibold text-xl">You have scored <span class="bg-green-800 rounded-2xl p-2 text-white">${score}</span> out of <span class="bg-orange-600 rounded-2xl p-2 text-white">${questions.length}</span> questions</p>
         <button class="bg-green-700 p-3 text-xl font-semibold mt-6 rounded-xl text-white cursor-pointer" onclick="location.reload()">Restart</button>
