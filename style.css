@@ -1,7 +1,7 @@
 .option-btn{
-    background-color:rgb(59 7 100);
+    background-color:orange;
     padding: 15px;
-    color: white;
+    /* color: white; */
     border-radius: 30px;
     margin-top: 4px;
     cursor: pointer;
