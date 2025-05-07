@@ -8,7 +8,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script defer src="index.js"></script>
 </head>
-<body>
-    
+<body class="bg-purple-950 flex flex-col items-center justify-center text-center h-screen">
+    <div id="quiz-box" class="bg-white p-6 rounded-xl shadow-2xl">
+      <div id="timer" class="text-orange-800">⏰15</div>
+      <div id="question">Loading...</div>
+      <div id="options" class="flex flex-col mb-6 rounded-lg">Loading...</div>
+      <button id="next-btn" class="bg-purple-700 text-white rounded-lg p-2 cursor-pointer font-semibold">Next Question</button>
+      <div id="result"></div>
+    </div>
 </body>
 </html>
